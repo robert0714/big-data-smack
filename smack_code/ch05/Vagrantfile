@@ -36,8 +36,8 @@ Vagrant.configure(2) do |config|
     d.vm.provision "shell", inline: <<-SHELL
          sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config    
          sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config   
-         sudo cp /vagrant/sshd_config  /etc/ssh/sshd_config   
          systemctl restart sshd
+         sudo mv /usr/local/apache-cassandra/conf/machine_2.yaml  /usr/local/apache-cassandra/conf/cassandra.yaml
       SHELL
   end  
   config.vm.define "MACHINE03" do |d| 
@@ -51,8 +51,8 @@ Vagrant.configure(2) do |config|
     d.vm.provision "shell", inline: <<-SHELL
          sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config    
          sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config   
-         sudo cp /vagrant/sshd_config  /etc/ssh/sshd_config   
          systemctl restart sshd
+         sudo mv /usr/local/apache-cassandra/conf/machine_3.yaml  /usr/local/apache-cassandra/conf/cassandra.yaml
       SHELL
   end
   if Vagrant.has_plugin?("vagrant-cachier")
