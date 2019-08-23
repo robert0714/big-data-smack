@@ -44,3 +44,8 @@ sudo chown -R hduser:hadoop apache-cassandra
 # Cassandra variables
 sudo sh -c 'echo export CASSANDRA_HOME=/usr/local/apache-cassandra >> /home/hduser/.bashrc'
 sudo sh -c 'echo export PATH=\$PATH:\$CASSANDRA_HOME/bin >> /home/hduser/.bashrc'
+
+cd /vagrant
+sudo cp machine_*.yaml /usr/local/apache-cassandra/conf/
+sudo chown -R hduser:hadoop  /usr/local/apache-cassandra/conf/ 
+sudo mv /usr/local/apache-cassandra/conf/machine_1.yaml  /usr/local/apache-cassandra/conf/cassandra.yaml
