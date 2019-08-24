@@ -169,6 +169,7 @@ steps:
 
 >>> from pyspark import SparkConf
 >>> from pyspark import SparkContext
+>>> from pyspark.sql import SQLContext
 
 def load_and_get_table_df(keys_space_name, table_name):
     table_df = sqlContext.read\
@@ -182,12 +183,3 @@ def load_and_get_table_df(keys_space_name, table_name):
 
 
 ```
-
-```python
-(cassandra) C:\Users\robert0714>python --packages "com.datastax.spark:spark-cassandra-connector_2.11:2.0.12" --conf   "spark.cassandra.connection.host=107.170.38.238"    --driver-class-path  "E:/Users/robert0714/.ivy2/jars/*.jar"
-spark.read\
-    .format("org.apache.spark.sql.cassandra")\
-    .options(table="users", keyspace="mykeyspace")\
-    .load().show()
-```
-https://ithelp.ithome.com.tw/articles/10188914
