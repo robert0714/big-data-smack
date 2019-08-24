@@ -127,8 +127,21 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> import os
 >>> os.environ['PYSPARK_SUBMIT_ARGS'] = '--packages com.datastax.spark:spark-cassandra-connector_2.11:2.0.12 --conf   spark.cassandra.connection.host=107.170.38.238    --driver-class-path  E:/Users/robert0714/.ivy2/jars/*.jar  pyspark-shell'
 ```
+### windows
+http://deelesh.github.io/pyspark-windows.html
 
-Then we need to create the Spark Context.
+#### Installing winutils
+Let’s download the winutils.exe and configure our Spark installation to find winutils.exe.
+1.  [hadoop-2.7.1](https://github.com/steveloughran/winutils/raw/master/hadoop-2.7.1/bin/winutils.exe)
+1.  [hadoop-2.8.1](https://github.com/steveloughran/winutils/blob/master/hadoop-2.8.1/winutils.exe)
+1.  [hadoop-3.0.0](https://github.com/steveloughran/winutils/blob/master/hadoop-3.0.0/bin/winutils.exe)
+
+steps:
+1.  Create a *hadoop\bin* folder inside the SPARK_HOME folder.
+1.  Download the winutils.exe for the version of hadoop against which your Spark installation was built for.
+1.  Create a system environment variable in Windows called *SPARK_HOME* that points to the SPARK_HOME folder path. 
+1.  Create another system environment variable in Windows called *HADOOP_HOME* that points to the hadoop folder inside the SPARK_HOME folder.
+1.  Since the *hadoop* folder is inside the SPARK_HOME folder, it is better to create *HADOOP_HOME* environment variable using a value of *%SPARK_HOME%\hadoop*. That way you don’t have to change HADOOP_HOME if SPARK_HOME is updated.
 
 ```python
 
