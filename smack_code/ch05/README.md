@@ -144,5 +144,18 @@ steps:
 1.  Since the *hadoop* folder is inside the SPARK_HOME folder, it is better to create *HADOOP_HOME* environment variable using a value of *%SPARK_HOME%\hadoop*. That way you don’t have to change HADOOP_HOME if SPARK_HOME is updated.
 
 ```python
+(cassandra) C:\Users\robert0714>pyspark --packages "com.datastax.spark:spark-cassandra-connector_2.11:2.0.12" --conf   "spark.cassandra.connection.host=107.170.38.238"    --driver-class-path  "E:/Users/robert0714/.ivy2/jars/*.jar"
 
+>>> from pyspark import SparkConf
+>>> from pyspark import SparkContext
+
+def load_and_get_table_df(keys_space_name, table_name):
+    table_df = sqlContext.read\
+        .format("org.apache.spark.sql.cassandra")\
+        .options(table=table_name, keyspace=keys_space_name)\
+        .load() 
+    return table_df
+    
+>>> users = load_and_get_table_df("mykeyspace", "users")
+>>> users.show()
 ```
