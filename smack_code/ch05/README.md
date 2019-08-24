@@ -201,4 +201,5 @@ def load_and_get_table_df(keys_space_name, table_name):
 | gPYSPARK_SUBMIT_ARGS | --packages com.datastax.spark:spark-cassandra-connector_2.11:2.4.1  --conf   spark.cassandra.connection.host=192.168.99.102    --conf  spark.cassandra.auth.username=cassandra      --conf  spark.cassandra.auth.password=cassandra   --driver-class-path  E:/Users/robert0714/.ivy2/jars/*.jar  pyspark-shell |
 | SPARK_HOME | E:\Users\robert0714\Desktop\spark-2.4.3-bin-hadoop2.7 |
 | SPARK_LOCAL_IP | 192.168.100.193 |
-<img src ="pydev/pydev_env.png" />>
+
+<img src ="pydev/pydev_env.png" />
