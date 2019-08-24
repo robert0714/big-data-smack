@@ -163,13 +163,21 @@ steps:
 1.  Since the *hadoop* folder is inside the SPARK_HOME folder, it is better to create *HADOOP_HOME* environment variable using a value of *%SPARK_HOME%\hadoop*. That way you don’t have to change HADOOP_HOME if SPARK_HOME is updated.
 
 ```python
-(cassandra) C:\Users\robert0714>pyspark --packages "com.datastax.spark:spark-cassandra-connector_2.11:2.0.12" --conf   "spark.cassandra.connection.host=107.170.38.238"    --driver-class-path  "E:/Users/robert0714/.ivy2/jars/*.jar"
-
 (cassandra) C:\Users\robert0714>pyspark --packages "com.datastax.spark:spark-cassandra-connector_2.11:2.4.1" --conf   "spark.cassandra.connection.host=107.170.38.238"    --driver-class-path  "E:/Users/robert0714/.ivy2/jars/*.jar"
+
+(cassandra) C:\Users\robert0714>pyspark --packages "com.datastax.spark:spark-cassandra-connector_2.11:2.4.1" --conf   "spark.cassandra.connection.host=192.168.99.100"     --conf  spark.cassandra.auth.username=cassandra      --conf  spark.cassandra.auth.password=cassandra     --driver-class-path  "E:/Users/robert0714/.ivy2/jars/*.jar"
 
 >>> from pyspark import SparkConf
 >>> from pyspark import SparkContext
 >>> from pyspark.sql import SQLContext
+
+spark = SparkSession\
+        .builder\
+        .getOrCreate()
+ 
+sc = spark.sparkContext
+sqlContext = SQLContext(sc)
+
 
 def load_and_get_table_df(keys_space_name, table_name):
     table_df = sqlContext.read\
