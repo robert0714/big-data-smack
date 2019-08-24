@@ -77,7 +77,7 @@ cqlsh:mykeyspace>
 
 ```
 
-## Using Apacje Spark-Cassandra Connector
+## Using Apache Spark-Cassandra Connector
 1. Download [Spark](http://apache.stu.edu.tw/spark/spark-2.4.3/spark-2.4.3-bin-hadoop2.7.tgz) and extract it .
 1. Install Scala 2.12.x
 
@@ -105,5 +105,31 @@ scala>  val conf = new SparkConf(true).set("spark.cassandra.connection.host","10
 scala>  val sc = new SparkContext(conf)
 scala>  val test_spark_rdd = sc.cassandraTable("mykeyspace", "users")
 scala>  test_spark_rdd.foreach(println)
+```
+
+## Running PySpark with Cassandra using spark-cassandra-connector
+ 
+ Preparing python environment.
+ 
+```bash
+conda create --name cassandra  python=3.7 anaconda
+conda activate cassandra
+python -m pip install --upgrade pip
+pip install cassandra-driver
+pip install pyspark
+```
+ In python prompt
+ 
+```python
+(cassandra) E:\Users\robert0714\Desktop\spark-2.0.2-bin-hadoop2.7\bin>python
+Python 3.7.3 (default, Apr 24 2019, 15:29:51) [MSC v.1915 64 bit (AMD64)] :: Anaconda, Inc. on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import os
+>>> os.environ['PYSPARK_SUBMIT_ARGS'] = '--packages com.datastax.spark:spark-cassandra-connector_2.11:2.0.12 --conf   spark.cassandra.connection.host=107.170.38.238    --driver-class-path  E:/Users/robert0714/.ivy2/jars/*.jar  pyspark-shell'
+```
+
+Then we need to create the Spark Context.
+
+```python
 
 ```
