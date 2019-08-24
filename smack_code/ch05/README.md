@@ -88,16 +88,22 @@ $ sbt/sbt assembly
 $ $SPARK_HOME/bin/spark-shell --jars ~/spark-cassandra-connector/spark-cassandra-connector/target/scala-2.10/connector-assembly-1.2.0-SNAPSHOT.jar 
 ```
 
+or
+
+```bash
+spark-shell  --packages com.datastax.spark:spark-cassandra-connector_2.11:2.0.12  --driver-class-path  E:/Users/robert0714/.ivy2/jars/*.jar
+
+spark-shell  --packages com.datastax.spark:spark-cassandra-connector_2.11:2.0.12  --driver-class-path  ${USERHOME}/.ivy2/jars/*.jar
+```
 In scala prompt,
 
 ```bash
 scala> sc.stop
-scala> import com.datastax.spark.connector._
-scala> import org.apache.spark.SparkContext
-scala> import org.apache.spark.SparkContext._
-scala> import org.apache.spark.SparkConf
+scala> import com.datastax.spark.connector._, org.apache.spark.SparkContext, org.apache.spark.SparkContext._, org.apache.spark.SparkConf
+scala>  sc.stop
 scala>  val conf = new SparkConf(true).set("spark.cassandra.connection.host","107.170.38.238")
 scala>  val sc = new SparkContext(conf)
 scala>  val test_spark_rdd = sc.cassandraTable("mykeyspace", "users")
+scala>  test_spark_rdd.foreach(println)
 
 ```
