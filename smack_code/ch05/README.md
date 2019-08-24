@@ -77,6 +77,23 @@ cqlsh:mykeyspace>
 
 ```
 
+```bash
+CREATE KEYSPACE test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1 };
+CREATE TABLE test.kv(key text PRIMARY KEY, value int);
+```
+
+寫個兩筆資料進去kv表，然後確認一下：
+
+```bash
+cqlsh:test> INSERT INTO test.kv(key, value) VALUES ('key1', 1);
+cqlsh:test> INSERT INTO test.kv(key, value) VALUES ('key2', 2);
+cqlsh:test> SELECT * FROM kv;
+ key  | value
+------+-------
+ key1 |     1
+ key2 |     2
+```
+
 ## Using Apache Spark-Cassandra Connector
 1. Download [Spark](http://apache.stu.edu.tw/spark/spark-2.4.3/spark-2.4.3-bin-hadoop2.7.tgz) and extract it .
 1. Install Scala 2.12.x
@@ -159,3 +176,4 @@ def load_and_get_table_df(keys_space_name, table_name):
 >>> users = load_and_get_table_df("mykeyspace", "users")
 >>> users.show()
 ```
+https://ithelp.ithome.com.tw/articles/10188914
