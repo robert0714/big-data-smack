@@ -143,6 +143,8 @@ Python 3.7.3 (default, Apr 24 2019, 15:29:51) [MSC v.1915 64 bit (AMD64)] :: Ana
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import os
 >>> os.environ['PYSPARK_SUBMIT_ARGS'] = '--packages com.datastax.spark:spark-cassandra-connector_2.11:2.0.12 --conf   spark.cassandra.connection.host=107.170.38.238    --driver-class-path  E:/Users/robert0714/.ivy2/jars/*.jar  pyspark-shell'
+
+
 ```
 ### windows
 http://deelesh.github.io/pyspark-windows.html
@@ -163,6 +165,8 @@ steps:
 ```python
 (cassandra) C:\Users\robert0714>pyspark --packages "com.datastax.spark:spark-cassandra-connector_2.11:2.0.12" --conf   "spark.cassandra.connection.host=107.170.38.238"    --driver-class-path  "E:/Users/robert0714/.ivy2/jars/*.jar"
 
+(cassandra) C:\Users\robert0714>pyspark --packages "com.datastax.spark:spark-cassandra-connector_2.11:2.4.1" --conf   "spark.cassandra.connection.host=107.170.38.238"    --driver-class-path  "E:/Users/robert0714/.ivy2/jars/*.jar"
+
 >>> from pyspark import SparkConf
 >>> from pyspark import SparkContext
 
@@ -175,5 +179,15 @@ def load_and_get_table_df(keys_space_name, table_name):
     
 >>> users = load_and_get_table_df("mykeyspace", "users")
 >>> users.show()
+
+
+```
+
+```python
+(cassandra) C:\Users\robert0714>python --packages "com.datastax.spark:spark-cassandra-connector_2.11:2.0.12" --conf   "spark.cassandra.connection.host=107.170.38.238"    --driver-class-path  "E:/Users/robert0714/.ivy2/jars/*.jar"
+spark.read\
+    .format("org.apache.spark.sql.cassandra")\
+    .options(table="users", keyspace="mykeyspace")\
+    .load().show()
 ```
 https://ithelp.ithome.com.tw/articles/10188914
