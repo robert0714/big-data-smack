@@ -94,11 +94,10 @@ scala> jdbcDF.show()
 |   1746| john|smith|
 +-------+-----+-----+
 
-
 scala>
-```
+``` 
 
-```
+
 ### windows
 http://deelesh.github.io/pyspark-windows.html
 
@@ -115,7 +114,7 @@ steps:
 1.  Create another system environment variable in Windows called *HADOOP_HOME* that points to the hadoop folder inside the SPARK_HOME folder.
 1.  Since the *hadoop* folder is inside the SPARK_HOME folder, it is better to create *HADOOP_HOME* environment variable using a value of *%SPARK_HOME%\hadoop*. That way you don’t have to change HADOOP_HOME if SPARK_HOME is updated.
 
-```python
+``` python
 >>> from pyspark.sql import SparkSession
 >>> from pyspark.sql import SQLContext
 >>> spark = SparkSession \
