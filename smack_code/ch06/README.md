@@ -2,8 +2,6 @@
 ```
 ~$ docker-compose -f docker-compose-mssql.yaml up -d
 
-
-
 mssql> CREATE TABLE users (user_id int PRIMARY KEY, fname text, lname text);
 mssql> INSERT INTO users (user_id, fname, lname) VALUES (1745, 'john', 'smith');
 mssql> INSERT INTO users (user_id, fname, lname) VALUES (1744, 'john', 'doe');
@@ -18,9 +16,9 @@ mssql> select * from users;
     1746 |  john | smith
 
 (3 rows)
+```
 
-
-## Using Apache Spark-Cassandra Connector
+## Using Apache Spark JDBC Connector
 1. Download [Spark](http://apache.stu.edu.tw/spark/spark-2.4.3/spark-2.4.3-bin-hadoop2.7.tgz) and extract it .
 1. Install Scala 2.12.x
 
