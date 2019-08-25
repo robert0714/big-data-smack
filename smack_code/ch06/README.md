@@ -141,7 +141,7 @@ steps:
 
 ## Pydev
 
-<img src ="pydev/pydev_lib.png" />>
+<img src ="../ch05/pydev/pydev_lib.png" />>
 
 
 | Variable | Value |
@@ -151,7 +151,7 @@ steps:
 | SPARK_HOME | E:\Users\robert0714\Desktop\spark-2.4.3-bin-hadoop2.7 |
 
 
-<img src ="pydev/pydev_env.png" />
+<img src ="../ch05/pydev/pydev_env.png" />
 
 ```Python
 # -*- coding: UTF-8 -*-
