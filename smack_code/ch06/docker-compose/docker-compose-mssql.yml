@@ -1,0 +1,21 @@
+version: '3.7'
+# https://docs.microsoft.com/zh-tw/sql/linux/quickstart-install-connect-docker?view=sql-server-2017&pivots=cs1-bash
+# https://github.com/Microsoft/azuredatastudio
+# docker-machine create default --virtualbox-memory "3096"          
+# sqlservr: This program requires a machine with at least 2000 megabytes of memory.
+services:
+  mssql:
+    container_name: mssql
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+#    - $PWD/msssqldata:/var/opt/mssql:z
+    environment:
+    - SA_PASSWORD=1qaz2wsx#EDC
+    - ACCEPT_EULA="Y"
+    - TZ=Asia/Taipei
+    - MSSQL_PID=Developer
+#    - attach_dbs="[{'dbName':'SampleDb','dbFiles':['/tmp/UTCS_Base_KS.mdf','/tmp/UTCS_Base_KS_log.ldf']}]"
+#    network_mode:  "host"
+    ports: 
+     - "1433:1433" 

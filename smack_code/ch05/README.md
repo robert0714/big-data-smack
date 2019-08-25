@@ -211,6 +211,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql import SQLContext
 from pyspark import SparkContext
 from pyspark.sql import DataFrame
+from pathlib import Path
 
 def load_and_get_table_df(keys_space_name, table_name):
     print("開始執行load_and_get_table_df") 
@@ -229,6 +230,7 @@ if __name__ == "__main__":
             .builder\
             .master("local[2]") \
             .appName("SparkCassandraApp") \
+            .config("spark.driver.extraClassPath",str(Path.home())+"/.ivy2/jars/com.datastax.spark_spark-cassandra-connector_2.11-2.4.1.jar") \
             .config("spark.cassandra.connection.host", "192.168.99.102") \
             .config("spark.cassandra.connection.port", "9042") \
             .config("spark.cassandra.auth.username", "cassandra") \
