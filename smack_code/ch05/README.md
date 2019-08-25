@@ -152,8 +152,8 @@ http://deelesh.github.io/pyspark-windows.html
 #### Installing winutils
 Let’s download the winutils.exe and configure our Spark installation to find winutils.exe.
 1.  [hadoop-2.7.1](https://github.com/steveloughran/winutils/raw/master/hadoop-2.7.1/bin/winutils.exe)
-1.  [hadoop-2.8.1](https://github.com/steveloughran/winutils/blob/master/hadoop-2.8.1/winutils.exe)
-1.  [hadoop-3.0.0](https://github.com/steveloughran/winutils/blob/master/hadoop-3.0.0/bin/winutils.exe)
+1.  [hadoop-2.8.1](https://github.com/steveloughran/winutils/raw/master/hadoop-2.8.1/winutils.exe)
+1.  [hadoop-3.0.0](https://github.com/steveloughran/winutils/raw/master/hadoop-3.0.0/bin/winutils.exe)
 
 steps:
 1.  Create a *hadoop\bin* folder inside the SPARK_HOME folder.
