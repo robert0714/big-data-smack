@@ -9,10 +9,12 @@ from pyspark.sql import SQLContext
 from pathlib import Path
 from abc import ABC, abstractmethod
 from pyspark.sql.readwriter import DataFrameReader
-
+import logging  
+import sys  
 
 class AbstractConfig(ABC):
-
+  logger = logging.getLogger(__name__) 
+  logging.basicConfig(stream=sys.stderr,format='%(asctime)s %(process)d %(levelname)s: %(message)s', datefmt='%Y/%m/%d %H:%M:%S', level=logging.INFO)
   @abstractmethod
   def returnSqlContext(self) -> SQLContext: 
     pass
