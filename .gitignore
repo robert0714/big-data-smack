@@ -5,3 +5,5 @@ hadoop-mapreduce-sametaste/
 **.swp
 **.log
 master.box
+*/**/.DS_Store
+**/**/.DS_Store

@@ -8,23 +8,49 @@ from pyspark.sql import SparkSession
 from pyspark.sql import SQLContext
 from pathlib import Path
 from abc import ABC, abstractmethod
+from pyspark.sql.readwriter import DataFrameReader
 
 
 class AbstractConfig(ABC):
 
   @abstractmethod
-  def returnSqlContext(self)  -> SQLContext: 
+  def returnSqlContext(self) -> SQLContext: 
     pass
+  
+  def __init__(self):
+        # Provide the location of where the config file exists
+        self.CONFIG_FILE = 'config.ini' 
+  
+  def parse_cassandra_config(self):
+        """Parse the configuration file and setup the required configuration."""
+         
+        config = ConfigParser()
+        config.read(self.CONFIG_FILE)
+        if 'cassandra_conf' not in config.sections():
+            return False
+        username = config['cassandra_conf']['username']
+        password = config['cassandra_conf']['password']
+        host = config['cassandra_conf']['host']
+        port = config['cassandra_conf']['port']
+    
+        return (username, password, host, port)
+
+  def parse_mssql_config(self):
+        """Parse the configuration file and setup the required configuration."""
+         
+        config = ConfigParser()
+        config.read(self.CONFIG_FILE)
+        if 'mssql_conf' not in config.sections():
+            return False
+        username = config['mssql_conf']['username']
+        password = config['mssql_conf']['password']
+        jdbc_url = config['mssql_conf']['jdbc_url']  
+        return (username, password, jdbc_url)
 
 
 #
 # for Cassandra
-class PySpakIISIConfig(AbstractConfig):
-
-    def __init__(self):
-        # Provide the location of where the config file exists
-        self.CONFIG_FILE = 'config.ini' 
-
+class PySpakCassandraConfig(AbstractConfig):
     def returnSqlContext(self) -> SQLContext:
         config = self.parse_cassandra_config()
         response = {}
@@ -51,20 +77,32 @@ class PySpakIISIConfig(AbstractConfig):
         sqlContext : SQLContext = SQLContext(sc)
         return sqlContext
         
-    def parse_cassandra_config(self):
-        """Parse the configuration file and setup the required configuration."""
-         
+#
+# for MSSQL
+class PySpakMSSQLConfig(AbstractConfig):
+    def returnSqlContext(self) -> SQLContext:
+        spark :SparkSession = SparkSession\
+            .builder\
+            .config("spark.driver.extraClassPath",str(Path.home())+"/.ivy2/jars/com.microsoft.sqlserver_mssql-jdbc-7.4.1.jre8.jar") \
+                .appName("Python Spark SQL data source example") \
+                .getOrCreate()       
+        spark.sparkContext.setLogLevel("OFF")
+        sc : SparkContext = spark.sparkContext
+        sqlContext : SQLContext = SQLContext(sc)
+        return sqlContext
+    
+    def returnDataFrameReader(self ,sqlContext : SQLContext) -> DataFrameReader:
         config = ConfigParser()
         config.read(self.CONFIG_FILE)
-        if 'cassandra_conf' not in config.sections():
+        if 'mssql_conf' not in config.sections():
             return False
-        username = config['cassandra_conf']['username']
-        password = config['cassandra_conf']['password']
-        host = config['cassandra_conf']['host']
-        port = config['cassandra_conf']['port']
-    
-        return (username, password, host, port)
-
-
-if __name__ == '__main__':
-    pass
+        username = config['mssql_conf']['username']
+        password = config['mssql_conf']['password']
+        jdbc_url = config['mssql_conf']['jdbc_url']  
+        reader :DataFrameReader = sqlContext.read.format("jdbc") \
+                .option("url", jdbc_url) \
+                .option("user",  username) \
+                .option("password", password)  
+        return reader
+        
+       
