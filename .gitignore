@@ -1,5 +1,7 @@
 *.gz
 *.tgz
+*/**/*.gz
+*/**/*.tgz
 .vagrant/
 hadoop-mapreduce-sametaste/
 **.swp
