@@ -34,7 +34,7 @@ class SimpleProducer {
 
   // Set the broker list for requesting metadata to find the lead broker
   props.put("metadata.broker.list",
-    "192.168.146.132:9092, 192.168.146.132:9093, 192.168 146.132:9094 ")
+    "107.170.38.238:9092, 107.170.38.238:9093, 107.170.38.238:9094 ")
 
   //This specifies the serializer class for keys
   props.put("serializer.class", "kafka.serializer.StringEncoder")

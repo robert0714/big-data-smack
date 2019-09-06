@@ -65,3 +65,8 @@ sudo sh -c 'echo export PATH=\$PATH:\$KAFKA_HOME/bin >> /home/hduser/.bashrc'
 sudo cp /vagrant/config/server-1.properties  /usr/local/apache-kafka/config/server-1.properties 
 sudo cp /vagrant/config/server-2.properties  /usr/local/apache-kafka/config/server-2.properties 
 sudo cp /vagrant/config/server-3.properties  /usr/local/apache-kafka/config/server-3.properties 
+
+
+sudo curl https://bintray.com/sbt/rpm/rpm > bintray-sbt-rpm.repo
+sudo mv bintray-sbt-rpm.repo /etc/yum.repos.d/
+sudo yum install -y sbt

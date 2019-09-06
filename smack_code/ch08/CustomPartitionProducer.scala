@@ -35,7 +35,7 @@ class CustomPartitionProducer {
 
   // Set the broker list for requesting metadata to find the lead broker
   props.put("metadata.broker.list",
-    "192.168.146.132:9092, 192.168.146.132:9093, 192.168.146.132:9094")
+    "107.170.38.238:9092, 107.170.38.238:9093, 107.170.38.238:9094")
 
   // This specifies the serializer class for keys
   props.put("serializer.class", "kafka.serializer.StringEncoder")
@@ -54,7 +54,7 @@ class CustomPartitionProducer {
   private def publishMessage(topic: String, messageCount: Int) {
     val random = new Random()
     for (mCount <- 0 until messageCount) {
-      val clientIP = "192.168.14." + random.nextInt(255)
+      val clientIP = "107.170.38." + random.nextInt(255)
       val accessTime = new Date().toString
       val msg = accessTime + ",kafka.apache.org," + clientIP
       println(msg)
