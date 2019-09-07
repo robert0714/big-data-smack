@@ -9,3 +9,5 @@ hadoop-mapreduce-sametaste/
 master.box
 */**/.DS_Store
 **/**/.DS_Store
+**/**/project
+**/**/target

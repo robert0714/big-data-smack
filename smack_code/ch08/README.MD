@@ -115,3 +115,31 @@ To obtain the list of topics on any Kafka server, use the following command:
 ```bash
 [hduser@MACHINE01 apache-kafka]$  bin/kafka-console-consumer.sh --zookeeper  localhost:2181 --from-beginning --topic reAmazingTopic
 ```
+
+# SBT && Scala
+
+https://www.scala-sbt.org/1.x/docs/sbt-by-example.html
+
+```bash
+(base) G:\tmp\big-data-smack\smack_code\ch08\kafka-samples>sbt
+[info] Loading project definition from G:\tmp\big-data-smack\smack_code\ch08\kafka-samples\project
+[info] Loading settings for project kafka-samples from build.sbt ...
+[info] Set current project to ch08 (in build file:/G:/tmp/big-data-smack/smack_code/ch08/kafka-samples/)
+[info] Welcome to sbt 1.3.0.
+[info] Here are some highlights of this release:
+[info]   - Coursier: new default library management using https://get-coursier.io
+[info]   - Super shell: displays actively running tasks
+[info]   - Turbo mode: makes `test` and `run` faster in interactive sessions. Try it by running `set ThisBuild / turbo := true`.
+[info] See https://www.lightbend.com/blog/sbt-1.3.0-release for full release notes.
+[info] Hide the banner for this release by running `skipBanner`.
+[info] sbt server started at local:sbt-server-f9bec2c298e4218804e9
+sbt:ch08>
+sbt:ch08> reload
+[info] Loading project definition from G:\tmp\big-data-smack\smack_code\ch08\kafka-samples\project
+[info] Loading settings for project kafka-samples from build.sbt ...
+[info] Set current project to ch08 (in build file:/G:/tmp/big-data-smack/smack_code/ch08/kafka-samples/)
+sbt:ch08> compile
+[success] Total time: 1 s, completed 2019/9/8 上午 12:14:28
+sbt:ch08> 
+
+```
