@@ -48,6 +48,9 @@ sudo sh -c 'echo export PATH=\$PATH:\$SCALA_HOME/bin >> /home/hduser/.bashrc'
 
 
 # Download Kafka to the vagrant shared directory if it doesn't exist yet
+# https://archive.apache.org/dist/kafka/0.10.2.2/kafka_2.12-0.10.2.2.tgz
+# ftp://ftp.twaren.net/Unix/Web/apache/kafka/2.3.0/kafka_2.12-2.3.0.tgz
+
 cd /vagrant
 if [ ! -f kafka_2.12-2.3.0.tgz ]; then
 	wget ftp://ftp.twaren.net/Unix/Web/apache/kafka/2.3.0/kafka_2.12-2.3.0.tgz
@@ -65,3 +68,10 @@ sudo sh -c 'echo export PATH=\$PATH:\$KAFKA_HOME/bin >> /home/hduser/.bashrc'
 sudo cp /vagrant/config/server-1.properties  /usr/local/apache-kafka/config/server-1.properties 
 sudo cp /vagrant/config/server-2.properties  /usr/local/apache-kafka/config/server-2.properties 
 sudo cp /vagrant/config/server-3.properties  /usr/local/apache-kafka/config/server-3.properties 
+
+sudo cp -R  /vagrant/kafka-samples  /home/hduser/
+sudo chown -R hduser:hadoop /home/hduser/kafka-samples
+
+sudo curl https://bintray.com/sbt/rpm/rpm > bintray-sbt-rpm.repo
+sudo mv bintray-sbt-rpm.repo /etc/yum.repos.d/
+sudo yum install -y sbt
