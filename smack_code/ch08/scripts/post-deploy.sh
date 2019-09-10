@@ -59,19 +59,20 @@ fi
 sudo tar vxzf kafka_2.12-0.10.2.2.tgz -C /usr/local
 cd /usr/local
 sudo mv kafka_2.12-0.10.2.2  apache-kafka
+sudo cp /vagrant/config/server-1.properties  /usr/local/apache-kafka/config/server-1.properties 
+sudo cp /vagrant/config/server-2.properties  /usr/local/apache-kafka/config/server-2.properties 
+sudo cp /vagrant/config/server-3.properties  /usr/local/apache-kafka/config/server-3.properties 
 sudo chown -R hduser:hadoop apache-kafka
 
 # Kafka variables
 sudo sh -c 'echo export KAFKA_HOME=/usr/local/apache-kafka >> /home/hduser/.bashrc'
 sudo sh -c 'echo export PATH=\$PATH:\$KAFKA_HOME/bin >> /home/hduser/.bashrc'
  
-sudo cp /vagrant/config/server-1.properties  /usr/local/apache-kafka/config/server-1.properties 
-sudo cp /vagrant/config/server-2.properties  /usr/local/apache-kafka/config/server-2.properties 
-sudo cp /vagrant/config/server-3.properties  /usr/local/apache-kafka/config/server-3.properties 
+
 
 sudo cp -R  /vagrant/kafka-samples  /home/hduser/
 sudo chown -R hduser:hadoop /home/hduser/kafka-samples
 
 sudo curl https://bintray.com/sbt/rpm/rpm > bintray-sbt-rpm.repo
 sudo mv bintray-sbt-rpm.repo /etc/yum.repos.d/
-sudo yum install -y sbt
+sudo yum install -y sbt   screen

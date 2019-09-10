@@ -31,13 +31,16 @@ object SimpleProducer {
 class SimpleProducer {
 
   val props = new Properties()
-
+  val listContent = "107.170.38.238:9092, 107.170.38.238:9093, 107.170.38.238:9094 "
   // Set the broker list for requesting metadata to find the lead broker
-  props.put("metadata.broker.list",
-    "107.170.38.238:9092, 107.170.38.238:9093, 107.170.38.238:9094 ")
+  props.put("metadata.broker.list",listContent)
+  props.put("bootstrap.servers",listContent)
 
   //This specifies the serializer class for keys
   props.put("serializer.class", "kafka.serializer.StringEncoder")
+  
+  props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
+  props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
 
   // 1 means the producer receives an acknowledgment once the lead replica
   // has received the data. This option provides better durability as the

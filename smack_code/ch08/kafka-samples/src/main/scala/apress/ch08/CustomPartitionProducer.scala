@@ -33,12 +33,17 @@ class CustomPartitionProducer {
 
   val props = new Properties()
 
+  val listContent = "107.170.38.238:9092, 107.170.38.238:9093, 107.170.38.238:9094 "
   // Set the broker list for requesting metadata to find the lead broker
-  props.put("metadata.broker.list",
-    "107.170.38.238:9092, 107.170.38.238:9093, 107.170.38.238:9094")
+  props.put("metadata.broker.list",listContent)
+  props.put("bootstrap.servers",listContent)
+  
 
   // This specifies the serializer class for keys
   props.put("serializer.class", "kafka.serializer.StringEncoder")
+
+  props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
+  props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
 
   // Defines the class to be used for determining the partition
   // in the topic where the message needs to be sent.
