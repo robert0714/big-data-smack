@@ -14,6 +14,15 @@
 [hduser@MACHINE01 apache-kafka]$ bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
+or
+
+```bash
+[vagrant@MACHINE01 ~]$ sudo -s
+[root@MACHINE01 vagrant]# su - hduser
+[hduser@MACHINE01 ~]$ cd /usr/local/zookeeper/
+[hduser@MACHINE01 zookeeper]$ bin/zkServer start
+```
+
 ## Starting the Broker
 
 ```bash
@@ -44,6 +53,17 @@ Obtain the output:
 amazingopic
 ```
 
+To get the details of a particular topic , run **kafak-topics** command with **--describe** parameter:
+
+```bash
+[hduser@MACHINE01 apache-kafka]$ bin/kafka-topics.sh --describe --zookeeper localhost:2181  --topic amazingTopic
+
+Topic:amazingTopic      PartitionCount:3        ReplicationFactor:1     Configs:
+        Topic: amazingTopic     Partition: 0    Leader: 0       Replicas: 0     Isr: 0
+        Topic: amazingTopic     Partition: 1    Leader: 0       Replicas: 0     Isr: 0
+        Topic: amazingTopic     Partition: 2    Leader: 0       Replicas: 0     Isr: 0
+```
+
 ## Starting a Producer
 
 ```bash
@@ -55,8 +75,14 @@ amazingopic
 
 ```bash
 [hduser@MACHINE01 apache-kafka]$  bin/kafka-console-consumer.sh --zookeeper  localhost:2181 --topic amazingTopic --from-beginning
-OpenJDK 64-Bit Server VM warning: If the number of processors is expected to increase from one, then you should configure the number of parallel GC threads appropriately using -XX:ParallelGCThreads=N
+
 Using the ConsoleConsumer with old consumer is deprecated and will be removed in a future major release. Consider using the new consumer by passing [bootstrap-server] instead of [zookeeper].
+```
+
+or 
+
+```bash
+[hduser@MACHINE01 apache-kafka]$ bin/kafka-console-consumer.sh   --bootstrap-server     localhost:2181  --topic amazingTopic  --from-beginning
 ```
 
 # Single Node-Multiple Broker Cluster
@@ -278,9 +304,31 @@ Let’s write a single threaded Scala consumer using the Consumer API for consum
 ### Step 4. Create the Topic
 
 Before running the program, you must create the amazingTopic topic from the command line:
+
 ```bash
 [hduser@MACHINE01 apache-kafka]$  bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic amazingTopic
 ```
+
+To check whether a topic has been sucessfully create , run **kafak-topics** command with **--list** parameter:
+
+```bash
+[hduser@MACHINE01 apache-kafka]$ bin/kafka-topics.sh --list --zookeeper localhost:2181  --topic amazingTopic
+
+amazingTopic
+```
+
+To get the details of a particular topic , run **kafak-topics** command with **--describe** parameter:
+
+```bash
+[hduser@MACHINE01 apache-kafka]$ bin/kafka-topics.sh --describe --zookeeper localhost:2181  --topic amazingTopic
+
+Topic:amazingTopic      PartitionCount:3        ReplicationFactor:1     Configs:
+        Topic: amazingTopic     Partition: 0    Leader: 0       Replicas: 0     Isr: 0
+        Topic: amazingTopic     Partition: 1    Leader: 0       Replicas: 0     Isr: 0
+        Topic: amazingTopic     Partition: 2    Leader: 0       Replicas: 0     Isr: 0
+```
+
+
 ### Step 5. Compile the Program
 
 Compile the program with the following command:
